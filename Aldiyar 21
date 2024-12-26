@@ -1,77 +1,101 @@
-// Question Class
 class Question {
-    int id;
-    String text;
-    String answer;
+    private int id;
+    private String text;
+    private String correctAnswer;
 
-    // Constructor
-    Question(int id, String text, String answer) {
+
+    public Question(int id, String text, String correctAnswer) {
         this.id = id;
         this.text = text;
-        this.answer = answer;
+        this.correctAnswer = correctAnswer;
     }
 
-    // Display Question
-    void display() {
+
+    public int getId() {
+        return id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+
+    public void display() {
         System.out.println("Question " + id + ": " + text);
     }
 }
 
-// Candidate Class
-class Candidate {
-    int id;
-    String name;
 
-    // Constructor
-    Candidate(int id, String name) {
+class Candidate {
+    private int id;
+    private String name;
+    private String givenAnswer; // Answer provided by the candidate
+
+
+    public Candidate(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    // Display Candidate
-    void display() {
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getGivenAnswer() {
+        return givenAnswer;
+    }
+
+    public void setGivenAnswer(String givenAnswer) {
+        this.givenAnswer = givenAnswer;
+    }
+
+
+    public void display() {
         System.out.println("Candidate " + id + ": " + name);
     }
 }
 
-// Exam Class
-class Exam {
-    String name;
-    Candidate candidate;
-    Question[] questions;
-
-    // Constructor
-    Exam(String name, Candidate candidate, Question[] questions) {
-        this.name = name;
-        this.candidate = candidate;
-        this.questions = questions;
-    }
-
-    // Display Exam Details
-    void display() {
-        System.out.println("Exam: " + name);
-        candidate.display();
-        for (Question q : questions) {
-            q.display();
-        }
-    }
-}
-
-// Main Class
 public class Main {
     public static void main(String[] args) {
-        // Create Questions
-        Question q1 = new Question(1, "What is 2 + 2?", "4");
-        Question q2 = new Question(2, "What is the capital of Kazakhstan?", "Astana");
 
-        // Create Candidate
-        Candidate c1 = new Candidate(1, "Aldiyar");
+        Question question = new Question(1, "What is 2 + 2?", "4");
 
-        // Create Exam
-        Question[] questions = {q1, q2};
-        Exam exam = new Exam("Sample Exam", c1, questions);
 
-        // Display Exam
-        exam.display();
+        Candidate candidate1 = new Candidate(1, "Aldiyar");
+        Candidate candidate2 = new Candidate(2, "Beknur");
+
+
+        candidate1.setGivenAnswer("4");
+        candidate2.setGivenAnswer("5");
+
+
+        question.display();
+
+       
+        System.out.println("\nAnswers:");
+        candidate1.display();
+        System.out.println("Answer: " + candidate1.getGivenAnswer());
+        if (candidate1.getGivenAnswer().equals(question.getCorrectAnswer())) {
+            System.out.println(candidate1.getName() + " answered correctly!");
+        } else {
+            System.out.println(candidate1.getName() + " answered incorrectly.");
+        }
+
+        candidate2.display();
+        System.out.println("Answer: " + candidate2.getGivenAnswer());
+        if (candidate2.getGivenAnswer().equals(question.getCorrectAnswer())) {
+            System.out.println(candidate2.getName() + " answered correctly!");
+        } else {
+            System.out.println(candidate2.getName() + " answered incorrectly.");
+        }
     }
 }
